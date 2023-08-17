@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Classifier Results</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("form").on("submit", function(event) {
+                event.preventDefault();
+                var inputList = $("#input_list").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/get_results",
+                    data: { input_list: inputList },
+                    success: function(response) {
+                        $("#results").html(response);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Classifier Results</h1>
+    <form>
+        <label for="input_list">Enter a list of numbers separated by commas:</label>
+        <input type="text" id="input_list" name="input_list" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="results">
+        <!-- Results will be displayed here -->
+    </div>
+</body>
+</html>
